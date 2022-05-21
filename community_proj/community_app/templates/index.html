@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    section {
+        margin:30px 15% 20px 15%;
+    }
+
+    #content_index {
+        padding:10px 30px 10px 50px;
+        border-bottom: 1px solid rgb(206, 203, 203);
+        display: flex;
+    }
+
+    #home_to_new {
+        margin-right:15%;
+        margin-bottom: 40px;
+        overflow: hidden;
+    }
+</style>
+
+{% load static %}
+<img src="{% static 'yonseiuniv.jpg' %}" width = 100%; height = 400px>
+
+<section>
+    {% for community in community_index %}
+        <a href="{% url 'detail' community.id %}">
+        <div id="content_index">
+            <div style="width:50%;">{{community.title}}</div>
+            <div style="width:20%;text-align: center;">익명</div>
+            <div style="width:30%;">{{community.created_at}}</div>
+        </div>
+        </a>
+    {% endfor %}
+</section>
+
+<div id="home_to_new">
+    <a href="{% url 'new' %}">
+        <button style="float:right;">새 글</button>
+    </a>
+</div>
+
+{% endblock %}

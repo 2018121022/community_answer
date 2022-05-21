@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    section {
+        text-align: center;
+    }
+</style>
+
+<section>
+    <form action="{% url 'new' %}" method="POST" enctype="multipart/form-data" style="margin-top:30px;">
+        {% csrf_token %}
+        <p>제목: <input type='text' name='title'></p>
+        <p>본문: <textarea name="content" cols='30' rows="10"></textarea></p>
+        <input type="file" name="image"><br><br>
+        <button type="submit">작성하기</button><br>
+    </form>
+    <a href="">
+        <button style="margin-top:10px;">홈으로</button>
+    </a>
+</section>
+
+{% endblock %}

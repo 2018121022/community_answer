@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    body {
+        font-size: 18px;
+    }
+
+    section {
+        margin:30px auto;
+        border: 1px solid rgb(139, 134, 134);
+        width:70%;
+    }
+
+    #detail_title {
+        display:flex;
+        padding:35px 30px 20px 90px;
+        font-weight: bold;
+    }
+
+    #detail_content {
+        padding:20px 30px 20px 90px;
+    }
+
+    #detail_image {
+        margin-left: 90px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    #detail_to_home {
+        padding-right: 60px;
+        margin-bottom: 50px;
+        overflow: hidden;
+    }
+
+    #comment_container {
+        padding:0 60px 0 90px;
+    }
+
+    #comment_index {
+        font-size:16px;
+        padding:10px 30px 10px 50px;
+        border-bottom: 1px solid rgb(206, 203, 203);
+        display: flex;
+    }
+
+    #comment_create {
+        width:fit-content;
+        margin:25px auto 30px auto;
+    }
+
+</style>
+
+<section>
+    <!-- 상세페이지 제목 -->
+    <div id="detail_title">
+        <div style="width:45%;">{{community.title}}</div>
+        <div style="width:25%; text-align: center;">익명</div>
+        <div style="width:30%;">{{community.created_at}}</div>
+    </div>
+
+    <!-- 상세페이지 내용 -->
+    <div id="detail_content">{{community.content}}</div>
+
+    <!-- 상세페이지 이미지 -->
+    {% if community.image %}
+    <div id="detail_image">
+        <img src="{{community.image.url}}" alt="" width="250px" height="150px">
+    </div>
+    {% endif %}
+
+    <!-- 홈 버튼 -->
+    <div id="detail_to_home">
+        <a href="{% url 'index' %}"><button style="float:right">홈으로</button></a>
+    </div>
+    
+    <div id="comment_container">
+        <h4>댓글 작성</h4>
+
+        <!-- 댓글 목록 -->
+        {% for comment in community.comment_set.all %}
+        <div id="comment_index">
+            <div style="width:50%;">{{comment.comment}}</div>
+            <div style="width:20%;text-align: center;">익명</div>
+            <div style="width:30%;">{{comment.created_at}}</div>
+        </div>
+        {% endfor %}
+
+        <!-- 댓글 작성 -->
+        <form method="POST" action="{% url 'comment' community.id %}" id="comment_create">
+            {% csrf_token %}
+            <input type="text" placeholder="댓글을 달아주세요." name="comment" maxlength="50">
+            <button type="submit">입력</button>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+
