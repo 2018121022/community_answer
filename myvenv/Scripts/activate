@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\vkstk\OneDrive\바탕 화면\Community\myvenv"
+VIRTUAL_ENV="C:\Users\vkstk\OneDrive\바탕 화면\강의자료\Community\myvenv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
